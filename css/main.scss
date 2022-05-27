@@ -1,0 +1,610 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Roboto Light", sans-serif;
+}
+
+label {
+  margin: 0;
+}
+a{
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+ul, li, ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  border: none;
+  margin: 0;
+  padding: 0;
+  position: unset;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  line-height: 1.2;
+}
+h1::before, h2::before, h3::before, h4::before, h5::before, h6::before {
+  content: none;
+}
+h1::after, h2::after, h3::after, h4::after, h5::after, h6::after {
+  content: none;
+}
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+@font-face {
+  font-family: 'Manrope';
+  src: url("../fonts/Manrope-Light.ttf");
+}
+@mixin placeholder{
+  font-family: Manrope,sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.0168em;
+  font-feature-settings: 'tnum' on, 'lnum' on;
+  color: #818181;
+}
+
+.container{
+  display: flex;
+  @media screen and(max-width:768.7px) {
+    flex-direction: column;
+    gap: 20px;
+  }
+}
+
+.container_multiselect{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px;
+}
+
+.container_amentities{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px;
+}
+
+.multiselect {
+  height: 48px;
+  width: 240px;
+  border-radius: 8px;
+  background: #FFFFFF;
+  border: 1px solid #A1A1A1;
+  display: flex;
+  align-items: center;
+  padding: 12px;
+  position: relative;
+  margin-bottom: 40px;
+  font: {
+    family: Manrope, sans-serif;
+    size: 16px;
+    weight: 400;
+  }
+  line-height: 24px;
+  letter-spacing: 0.0168em;
+  text-align: left;
+
+  &:before{
+    position: absolute;
+    content: "";
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 5px;
+    border-color: #616161 transparent transparent transparent;
+    top: 21px;
+    right: 19px;
+  }
+}
+
+.multiselectActive {
+  height: 48px;
+  width: 240px;
+  border-radius: 8px;
+  background: #FFFFFF;
+  border: 1px solid #5096F1;
+  display: flex;
+  align-items: center;
+  padding: 12px;
+  position: relative;
+  font: {
+    family: Manrope, sans-serif;
+    size: 16px;
+    weight: 400;
+  }
+  line-height: 24px;
+  letter-spacing: 0.0168em;
+  text-align: left;
+  &:before{
+    position: absolute;
+    content: "";
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 5px;
+    border-color: transparent transparent #1672EC transparent;
+    top: 18px;
+    right: 19px;
+  }
+  &:after{
+    content: 'industry';
+    position: absolute;
+    background: #fff;
+    padding: 2px 4px;
+    top: -10px;
+    left: 8px;
+    font: {
+      size: 12px;
+      weight: 400;
+      family: Manrope, sans-serif;
+    }
+    line-height: 15px;
+  }
+}
+
+.multiselectList{
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 8px;
+  margin-top: 8px;
+  box-shadow: 0px 2px 4px rgba(97, 97, 97, 0.18), 0px 4px 8px rgba(97, 97, 97, 0.18);
+  border-radius: 12px;
+  width: 240px;
+  height: 400px;
+}
+.listItem{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 2px 8px;
+  gap: 12px;
+  width: 190px;
+  height: 48px;
+
+  .custom-checkbox {
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+  }
+
+  .custom-checkbox+label {
+    display: flex;
+    align-items: center;
+    user-select: none;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    padding: 0 0 0 40px;
+    font: {
+      family: Manrope, sans-serif;
+      size: 16px;
+      weight: 400;
+    }
+    &:hover{
+      cursor: pointer;
+    }
+  }
+  .custom-checkbox+label::before {
+    content: '';
+    width: 1em;
+    height: 1em;
+    flex-shrink: 0;
+    flex-grow: 0;
+    border: 2px solid #adb5bd;
+    border-radius: 3px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 50% 50%;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 10px;
+    margin: auto;
+  }
+  .custom-checkbox:checked+label::before {
+    border-color: #0F56B3;
+    background-color: #0F56B3;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%23fff' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z'/%3e%3c/svg%3e");
+    outline: 4px solid #C5DCFA80;
+    background-size: 90%;
+  }
+  .custom-checkbox:checked+label{
+    align-items: start;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-weight: bold;
+    &::after{
+      content: '1 item selected';
+      font-family: 'Manrope',  sans-serif;
+      font-style: normal;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 142%;
+      display: flex;
+      align-items: center;
+      letter-spacing: 0.0168em;
+      font-feature-settings: 'tnum' on, 'lnum' on;
+      color: #1672EC;
+    }
+  }
+
+}
+
+.amentities{
+  height: 48px;
+  width: 460px;
+  border-radius: 8px;
+  background: #FFFFFF;
+  border: 1px solid #A1A1A1;
+  display: flex;
+  align-items: center;
+  padding: 12px;
+  position: relative;
+  margin-bottom: 40px;
+  font: {
+    family: Manrope, sans-serif;
+    size: 16px;
+    weight: 400;
+  }
+  line-height: 24px;
+  letter-spacing: 0.0168em;
+  text-align: left;
+  
+  @media screen and (max-width: 576.7px) {
+    max-width: 480px;
+    width: 100%;
+    min-width: 260px;
+  }
+
+  &:before{
+    position: absolute;
+    content: "";
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 5px;
+    border-color: #616161 transparent transparent transparent;
+    top: 21px;
+    right: 19px;
+  }
+}
+
+.amentitiesMultiline{
+  height: auto;
+  width: 460px;
+  border-radius: 8px;
+  background: #FFFFFF;
+  border: 1px solid #A1A1A1;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: start;
+  padding: 12px 100px 12px 12px;
+  gap: 12px;
+  position: relative;
+  margin-bottom: 40px;
+  font: {
+    family: Manrope, sans-serif;
+    size: 16px;
+    weight: 400;
+  }
+  line-height: 24px;
+  letter-spacing: 0.0168em;
+  text-align: left;
+  @media screen and (max-width: 576.7px) {
+    padding: 12px 50px 12px 12px;
+    max-width: 480px;
+    min-width: 260px;
+    width: 100%;
+  }
+  &:before{
+    position: absolute;
+    content: "\00d7";
+    width: 15px;
+    height: 15px;
+    color: #D4B011;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    right: 16px;
+    font-size: x-large;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  &:after{
+    content: 'Multiline amenities picked';
+    position: absolute;
+    background: #fff;
+    padding: 2px 4px;
+    top: -10px;
+    left: 8px;
+    font: {
+      size: 12px;
+      weight: 400;
+      family: Manrope, sans-serif;
+    }
+    line-height: 15px;
+  }
+}
+
+.amentities_item{
+  width: auto;
+  height: 24px;
+  background: #e0e0e0;
+  border-radius: 4px;
+  padding: 5px 14px;
+  font-family: 'Manrope', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 142%;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  letter-spacing: 0.0168em;
+  font-feature-settings: 'tnum' on, 'lnum' on;
+  color: #000000;
+
+  &:hover{
+    background: #616161;
+    color: #E0E0E0;
+    cursor: pointer;
+  }
+}
+
+.amentitiesSearch{
+  height: auto;
+  width: 460px;
+  border-radius: 8px;
+  background: #FFFFFF;
+  border: 1px solid #A1A1A1;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  padding: 12px;
+  gap: 12px;
+  position: relative;
+  font: {
+    family: Manrope, sans-serif;
+    size: 16px;
+    weight: 400;
+  }
+  line-height: 24px;
+  letter-spacing: 0.0168em;
+  text-align: left;
+  @media screen and (max-width: 576.7px) {
+    padding: 12px 50px 12px 12px;
+    max-width: 480px;
+    min-width: 260px;
+    width: 100%;
+  }
+  &:after{
+    content: 'Amenities';
+    position: absolute;
+    background: #fff;
+    padding: 2px 4px;
+    top: -10px;
+    left: 8px;
+    font: {
+      size: 12px;
+      weight: 400;
+      family: Manrope, sans-serif;
+    }
+    line-height: 15px;
+  }
+}
+
+.searchList{
+  .listItem{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 2px 8px;
+    gap: 12px;
+    width: 190px;
+    height: 48px;
+
+    .custom-checkbox {
+      position: absolute;
+      z-index: -1;
+      opacity: 0;
+    }
+
+    .custom-checkbox+label {
+      display: flex;
+      align-items: center;
+      user-select: none;
+      width: 100%;
+      height: 100%;
+      position: relative;
+      padding: 0 0 0 40px;
+      font: {
+        family: Manrope, sans-serif;
+        size: 16px;
+        weight: 400;
+      }
+      &:hover{
+        cursor: pointer;
+      }
+    }
+    .custom-checkbox+label::before {
+      content: '';
+      width: 1em;
+      height: 1em;
+      flex-shrink: 0;
+      flex-grow: 0;
+      border: 2px solid #adb5bd;
+      border-radius: 3px;
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-size: 50% 50%;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 10px;
+      margin: auto;
+    }
+    .custom-checkbox:checked+label::before {
+      border-color: #0F56B3;
+      background-color: #0F56B3;
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%23fff' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z'/%3e%3c/svg%3e");
+      outline: 4px solid #C5DCFA80;
+      background-size: 90%;
+    }
+    .custom-checkbox:checked+label{
+      align-items: start;
+      font-weight: bold;
+      &::after{
+        content: '';
+      }
+    }
+
+  }
+}
+
+.search_header{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  .amentities_item{
+    color: #414141;
+    &:hover{
+      background: #616161;
+      color: #E0E0E0;
+      cursor: pointer;
+    }
+  }
+}
+
+.search_footer{
+  margin: 30px 0 0 0;
+  padding-top: 30px;
+  width: 100%;
+  border-top: 1px solid #E0E0E0;
+  .listItem{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 2px 8px;
+    gap: 12px;
+    width: 100%;
+    height: 48px;
+
+    .custom-checkbox {
+      position: absolute;
+      z-index: -1;
+      opacity: 0;
+    }
+
+    .custom-checkbox+label {
+      display: flex;
+      align-items: center;
+      user-select: none;
+      width: 100%;
+      height: 100%;
+      position: relative;
+      padding: 0 0 0 40px;
+      &:hover{
+        cursor: pointer;
+      }
+    }
+    .custom-checkbox+label::before {
+      content: '';
+      width: 1em;
+      height: 1em;
+      flex-shrink: 0;
+      flex-grow: 0;
+      border: 2px solid #adb5bd;
+      border-radius: 3px;
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-size: 50% 50%;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 10px;
+      margin: auto;
+    }
+    .custom-checkbox:checked+label::before {
+      border-color: #0F56B3;
+      background-color: #0F56B3;
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%23fff' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z'/%3e%3c/svg%3e");
+      outline: 4px solid #C5DCFA80;
+      background-size: 90%;
+    }
+    .custom-checkbox:checked+label{
+      align-items: start;
+      font-weight: bold;
+      &::after{
+        content: '';
+      }
+    }
+
+  }
+  a{
+    color: #1672EC;
+    font-weight: 700;
+  }
+}
+
+.search_item{
+  width: 100%;
+  height: 40px;
+  position: relative;
+  span{
+    width: 18px;
+    height: 18px;
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    left: 15px;
+    svg{
+      width: 100%;
+      height: 100%;
+      fill: #818181;
+      stroke-width: 35px;
+      stroke: white;
+    }
+  }
+  input{
+    width: 100%;
+    height: 100%;
+    background: #FFFFFF;
+    border: 1px solid #E0E0E0;
+    border-radius: 8px;
+    padding: 8px 0 8px 48px;
+    &::-webkit-input-placeholder{
+      @include placeholder();
+    }
+    &:-moz-placeholder{
+      @include placeholder();
+    }
+    &::-moz-placeholder{
+      @include placeholder();
+    }
+    &:-ms-input-placeholder{
+      @include placeholder();
+    }
+
+  }
+}
